@@ -81,7 +81,7 @@ docker-release: docker-prepare docker-login
 DOCKER_OUTPUT=$(OUTPUT_ROOT)docker/
 
 DOCKER_MAKE=V=$V GOOS_OVERRIDE='GOOS=linux GOARCH=amd64' PREFIX=$(1) make $(1)bin/$(BINNAME)
-DOCKER_BUILD=$Q docker build -t $(DOCKER_IMAGE_NAME):latest -f docker/Dockerfile.step-ca --build-arg BINPATH=$(DOCKER_OUTPUT)bin/$(BINNAME) .
+DOCKER_BUILD=$Q docker build --no-cache -t $(DOCKER_IMAGE_NAME):latest -f docker/Dockerfile.step-ca --build-arg BINPATH=$(DOCKER_OUTPUT)bin/$(BINNAME) .
 
 docker-dev: docker/Dockerfile.step-ca
 	mkdir -p $(DOCKER_OUTPUT)
